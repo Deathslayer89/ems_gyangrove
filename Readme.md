@@ -113,7 +113,7 @@ This endpoint does not require any request body.
 
 ## GET /events/find
 
-Retrives events based on the user's location and a specifie date.
+Retrives events based on the user's location and a specific date.
 
 ### Request
 
