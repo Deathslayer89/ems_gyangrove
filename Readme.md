@@ -131,7 +131,7 @@ date: The search date in the format YYYY-MM-DD (required)
 
 ```json
 {
-  [
+  
     "page_no": {
     "events": [
       {
@@ -148,13 +148,14 @@ date: The search date in the format YYYY-MM-DD (required)
     "totalEvents": 44,
     "totalPages": 1
   },
+
   ....
-]
+
 }
 
 ```
 
-response is an array of objects and each object data is a page and each page has following data.
+response is an Object and inside each object data is a page and it's page no is the key value. Each page has following values.
 
 - `events`: An array of event objects, with each object containing the same properties as before (`event_name`, `city_name`, `date`, `time`, `weather`, `distance_km`).
 - `page`: The current page number.
