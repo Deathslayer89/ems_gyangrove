@@ -103,7 +103,15 @@ This endpoint does not require any request body.
 }
 ```
 
-- **500 Internal Server Error**:
+- **409 Bad request Error**:
+
+```json
+{
+  "error": "Error message"
+}
+```
+
+- ** 500 Internal Server Error **:
 
 ```json
 {
@@ -161,6 +169,14 @@ response is an array of objects and each object data is a page and each page has
 - `pageSize`: The number of events per page.
 - `totalEvents`: The total number of events matching the criteria.
 - `totalPages`: The total number of pages based on the `pageSize`.
+
+- ** 400 Bad Request Error **:
+
+```json
+{
+  "error": "Error message"
+}
+```
 
 - ** 500 Internal Server Error **:
 

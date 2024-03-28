@@ -1,10 +1,10 @@
 const axios = require('axios');
 
 exports.getWeather = async (city, date) => {
-  const response = await axios.get(
-    `https://gg-backend-assignment.azurewebsites.net/api/Weather?code=${process.env.GG_WEATHER_CODE}==&city=${city}&date=${date}`
-  );
-  return response.data;
+    const response = await axios.get(
+      `https://gg-backend-assignment.azurewebsites.net/api/Weather?code=${process.env.GG_WEATHER_CODE}==&city=${city}&date=${date}`
+    );
+    return response.data;
 };
 
 exports.getDistance = async (latitude1, longitude1, latitude2, longitude2) => {

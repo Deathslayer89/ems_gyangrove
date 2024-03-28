@@ -11,7 +11,7 @@ exports.createEvents = async (req, res) => {
       .on("end", async () => {
         const result = await EventService.createEvents(events);
         res
-          .status(result.error ? 500 : 200)
+          .status(result.error ? 409 : 200)
           .json(
             result.error
               ? { error: result.error.message }
@@ -27,9 +27,8 @@ exports.findEvents = async (req, res) => {
   try {
     const { latitude, longitude, date } = req.query;
     const result = await EventService.findEvents(latitude, longitude, date);
-
     if (result.error) {
-      res.status(500).json({ error: result.error.message });
+      res.status(400).json({ error: result.error.message });
     } else {
       res.status(200).json({...result});
     }

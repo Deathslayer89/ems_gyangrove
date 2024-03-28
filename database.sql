@@ -3,7 +3,7 @@ create table if not exists
     id bigint primary key generated always as identity,
     event_name text not null,
     city_name text not null,
-    event_date timestamp with time zone not null,
+    event_date date not null,
     event_time time not null,
     latitude float not null,
     longitude float not null,
