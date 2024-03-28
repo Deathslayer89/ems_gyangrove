@@ -50,7 +50,7 @@ create table if not exists
  npm run start
 ```
 
-2. use curl or postman like software to send requests.
+2. use curl or postman like software to test api requests.
 
 # Tech Stack and Design Decisions
 
