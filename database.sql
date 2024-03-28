@@ -1,9 +1,18 @@
-CREATE TABLE IF NOT EXISTS events (
-  id SERIAL PRIMARY KEY,
-  event_name TEXT NOT NULL,
-  city_name TEXT NOT NULL,
-  event_date DATE NOT NULL,
-  event_time TIME NOT NULL,
-  latitude FLOAT NOT NULL,
-  longitude FLOAT NOT NULL
-);
+create table if not exists
+  events (
+    id bigint primary key generated always as identity,
+    event_name text not null,
+    city_name text not null,
+    event_date timestamp with time zone not null,
+    event_time time not null,
+    latitude float not null,
+    longitude float not null,
+    constraint no_duplicate_rows unique (
+      event_name,
+      city_name,
+      event_date,
+      event_time,
+      latitude,
+      longitude
+    )
+  );
