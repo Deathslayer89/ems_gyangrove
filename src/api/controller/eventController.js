@@ -1,16 +1,22 @@
-const EventService = require('../../services/eventService');
-const csv = require('csv-parser');
-const fs = require('fs');
+const EventService = require("../../services/eventService");
+const csv = require("csv-parser");
+const fs = require("fs");
 
 exports.createEvents = async (req, res) => {
   try {
     const events = [];
-    fs.createReadStream('events.csv')
+    fs.createReadStream("events.csv")
       .pipe(csv())
-      .on('data', (data) => events.push(data))
-      .on('end', async () => {
-        await EventService.createEvents(events);
-        res.status(200).json({ message: 'Events created successfully' });
+      .on("data", (data) => events.push(data))
+      .on("end", async () => {
+        const result = await EventService.createEvents(events);
+        res
+          .status(result.error ? 500 : 200)
+          .json(
+            result.error
+              ? { error: result.error.message }
+              : { message: "Events created successfully" }
+          );
       });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -20,15 +26,13 @@ exports.createEvents = async (req, res) => {
 exports.findEvents = async (req, res) => {
   try {
     const { latitude, longitude, date } = req.query;
-    const events = await EventService.findEvents(latitude, longitude, date);
+    const result = await EventService.findEvents(latitude, longitude, date);
 
-    res.status(200).json({
-      events,
-      page: 1,
-      pageSize: 10,
-      totalEvents: events.length,
-      totalPages: 1,
-    });
+    if (result.error) {
+      res.status(500).json({ error: result.error.message });
+    } else {
+      res.status(200).json({...result});
+    }
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
